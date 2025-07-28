@@ -9,7 +9,7 @@ module.exports = {
     if (!text) return message.reply('Sai cú pháp rùi 🥺');
     const userTags = text.match(/<@!?(\d+)>/g) || [];
     if (userTags.length < 2) return message.reply('Không đủ tag 2 player, kiểm tra lại 🍓');
-    if (!hasRoleByTag(message, addTag(message.author.id))) return message.reply(`<@${message.author.id}> Bạn không có quyền hạn!`);
+    if (!hasRoleByTag(message, addTag(message.author.id))) return message.reply(`${addTag(message.author.id)} Bạn không có quyền hạn!`);
     // Tách ID từ tag
     const userIds = userTags.map(tag => tag.match(/\d+/)[0]);
     room.setPlayer1(userIds[0]);
