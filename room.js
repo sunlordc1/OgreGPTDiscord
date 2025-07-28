@@ -10,5 +10,4 @@ module.exports = {
     setTurn(value) { if (value === 1 || value === 2) turn = value; },
     getTurnToTagUser(value) { return value === 1 ? player1 : player2; },
     reset() { player1 = null; player2 = null; turn = 1; },
-    addTag(value) { return `<@${value}>`; }
 };
