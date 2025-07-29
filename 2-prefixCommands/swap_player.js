@@ -1,5 +1,5 @@
-const room = require('../room');
-const { hasRoleByTag } = require('../roles');
+const game = require('../game');// <-- import game object
+const { hasRoleByTag } = require('../roles');// <-- import hàm hasRoleByTag
 const { addTag } = require('../ultil'); // <-- import hàm addTag
 
 module.exports = {
@@ -12,13 +12,13 @@ module.exports = {
     if (!hasRoleByTag(message, addTag(message.author.id))) return message.reply(`${addTag(message.author.id)} Bạn không có quyền hạn!`);
     // Tách ID từ tag
     const userIds = userTags.map(tag => tag.match(/\d+/)[0]);
-    room.setPlayer1(userIds[0]);
-    room.setPlayer2(userIds[1]);
+    game.setPlayer1(userIds[0]);
+    game.setPlayer2(userIds[1]);
     message.channel.send(
       `💬 Đã cài đặt player:
-- Player 1:  ${addTag(room.player1)}
-- Player 2:  ${addTag(room.player2)}
-- Turn hiện tại:  ${addTag(room.turn === 1 ? room.player1 : room.player2)}`
+- Player 1:  ${addTag(game.player1)}
+- Player 2:  ${addTag(game.player2)}
+- Turn hiện tại:  ${addTag(game.turn === 1 ? game.player1 : game.player2)}`
     );
     return;
   },
