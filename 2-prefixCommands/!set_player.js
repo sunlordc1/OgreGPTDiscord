@@ -15,7 +15,7 @@ module.exports = {
     game.setPlayer1(userIds[0]);
     game.setPlayer2(userIds[1]);
 
-    message.channel.send(
+    global.main_message = message.channel.send(
       `💬 Đã cài đặt player:
 - Player 1:  ${addTag(game.player1.id)}
   - Vtumon:
