@@ -21,5 +21,8 @@ function getrandomItems() {
     used: false
   }));
 }
-
-module.exports = { items, getrandomItems };
+function getNameOfItemById(item_id) {
+  const item = items.find(item => item.id === item_id);
+  return item ? item.name : null;
+}
+module.exports = { items, getrandomItems, getNameOfItemById };

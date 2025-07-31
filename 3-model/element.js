@@ -52,10 +52,19 @@ function getElementByIcon(icon) {
 function getElementByName(name) {
     return elements.find(e => e.name.toLowerCase() === name.toLowerCase()) || null; // Trả về đối tượng hệ thống hoặc null nếu không tìm thấy
 }
+/**
+ * Kiểm tra name có phải là name element không 
+ * @param {string} name 
+ * @returns {boolean}
+ */
+function isElementNameValid(name) {
+    return elements.some(el => el.name.toLowerCase() === name.toLowerCase());
+}
 module.exports = {
-    get elements() { return elements; },
+    get data() { return elements; },
     getElementById,
     getElementByIcon,
     getElementByName,
-    getElementNameByIcon
+    getElementNameByIcon,
+    isElementNameValid
 };
