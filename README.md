@@ -44,7 +44,29 @@
 
    ```bash
    npm install
+3. Tạo file **.env** ở thư mục gốc với nội dung:
+    ```bash
+    TOKEN=your_discord_bot_token_here
+    GUILD_ID=your_server_id_here
+    CLIENT_ID=your_client_id_here
+🛠️ Lấy BOT Token ở trong 👉 https://discord.com/developers/applications
+🛠️ Cách bật hiển thị ID trên Discord
+Mở Discord
 
+Nhấn vào ⚙️ User Settings (góc dưới trái)
+
+Chọn tab Advanced (Nâng cao)
+
+Bật Developer Mode (Chế độ Nhà phát triển) ✅
+
+🛠️ Cách lấy Guild ID (ID của server)
+Sau khi bật Developer Mode xong:
+
+Chuột phải vào tên server (góc trên trái Discord)
+
+Chọn Copy Server ID (Sao chép ID máy chủ)
+
+🎉 Vậy là cậu có được GUILD_ID rồi đó!
 ## 🧪 Bước 5: Chạy bot
 
 1. Mở lại **Terminal** trong thư mục chứa file bot (ví dụ: `index.js`)
