@@ -56,3 +56,7 @@
 
    ```bash
    node index.js
+  
+3. Để cập nhập command:
+    ```bash
+    node deploy-commands.js
