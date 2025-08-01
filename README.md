@@ -40,10 +40,7 @@
 1. Cài đặt **Node.js** tại:  
    👉 https://nodejs.org
 
-2. Tạo một thư mục mới để chứa mã nguồn bot của cậu  
-   *(ví dụ: `my-discord-bot`)*
-   
-3. Mở **Terminal** (hoặc CMD) trong thư mục đó và chạy lần lượt các lệnh sau:
+2. Mở **Terminal** (hoặc CMD) trong thư mục đó và chạy lần lượt các lệnh sau:
 
    ```bash
    npm install
