@@ -7,7 +7,9 @@ const { addTag, deleteMessage } = require('./utils'); // <-- import hàm addTag
 const { getItemListComponents } = require('./4-components/item_list')
 const { getVtumonListComponents } = require('./4-components/vtumon_list')
 const { getElementListComponents } = require('./4-components/element_list')
-const { API_Item_Restream, API_Item_Instant_Use } = require('./5-apis/item')
+const { getSkillListComponents } = require('./4-components/skill_list')
+
+const { API_Item_Restream, API_Item_Instant_Use, API_Target_Vtumon, API_Skill_Instant_Use } = require('./5-apis/actions')
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
@@ -55,6 +57,8 @@ client.on('interactionCreate', async interaction => {
     let item_list = game.getItemOfPlayer(interaction.user.id); // <-- Lấy item của người chơi
     let vtumon = null
     let vtumon_list = game.getVtumonOfPlayer(interaction.user.id); // <-- Lấy vtumon của người chơi
+    let currentVtumon = game.getCurrentVtumon()
+    // let currentPlayer = game.getCurrentPlayer()
     let buttons
     let n = 0;
     let ct = ''
@@ -71,6 +75,23 @@ client.on('interactionCreate', async interaction => {
           break;
         case 'skill':
           game.setTypeQueryCommand('skill'); // <-- Set type query command to skip
+          deleteMessage(interaction)
+          if (!currentVtumon.skills || currentVtumon.skills.length === 0) {
+            await interaction.message.channel.send(`${addTag(interaction.user.id)}, bạn không có item nào! 🍇`);
+            return; // Không có item nào để chọn
+          }
+          buttons = getSkillListComponents(currentVtumon.skills);
+          n = 0
+          ct = ''
+          for (const skill of currentVtumon.skills) {
+            ct += `\n${game.skill_icons[n]} [Mana:${skill.mana_cost}] - {${skill.element_name}} ${skill.name} (ID:${n}) `
+            n++;
+          }
+          ct += `\n - Gõ /{ID}a để thực hiện dùng kĩ năng nhanh`
+          await interaction.message.channel.send({
+            content: `Trainer ${addTag(interaction.user.id)}, cậu chọn skill nào nè? ✨` + ct + "\n",
+            components: buttons
+          });
           is_delete = false
           break;
         case 'item':
@@ -96,6 +117,23 @@ client.on('interactionCreate', async interaction => {
           break;
         case 'swap':
           game.setTypeQueryCommand('swap'); // <-- Set type query command to skip
+          game.setTypeIdQueryCommand(interaction.customId)
+          deleteMessage(interaction)
+          if (!vtumon_list || vtumon_list.length === 0) {
+            await interaction.message.channel.send(`${addTag(interaction.user.id)}, bạn không có vtumon nào! 🍇`);
+            return; // Không có item nào để chọn
+          }
+          buttons = getVtumonListComponents(vtumon_list);
+          n = 0;
+          ct = ''
+          for (const i of vtumon_list) {
+            ct += `\n${game.vtumon_icons[n]} ${i.name} [${i.elements[0]}, ${i.elements[1]}]`
+            n++;
+          }
+          await interaction.message.channel.send({
+            content: `Trainer ${addTag(interaction.user.id)}, cậu chọn đổi vtumon nào? ✨` + ct + "\n",
+            components: buttons
+          });
           is_delete = false
           break;
 
@@ -106,11 +144,11 @@ client.on('interactionCreate', async interaction => {
             let containerComponent
             switch (game.query_command.type_id) {
               case 'Restream':
-                game.API_Item_Restream(interaction)
+                API_Item_Restream(interaction)
                 break;
 
               default:
-                game.API_Item_Instant_Use(interaction)
+                API_Item_Instant_Use(interaction)
                 break;
             }
           }
@@ -135,13 +173,13 @@ client.on('interactionCreate', async interaction => {
             let containerComponent
             switch (game.query_command.type_id) {
               case 'Restream':
-                game.API_Item_Restream(interaction)
+                API_Item_Restream(interaction)
                 break;
               default:
                 game.setTypeIdQueryCommand(interaction.customId)
                 deleteMessage(interaction)
                 if (!vtumon_list || vtumon_list.length === 0) {
-                  await interaction.message.channel.send(`${addTag(interaction.user.id)}, bạn không có item nào! 🍇`);
+                  await interaction.message.channel.send(`${addTag(interaction.user.id)}, bạn không có vtumon nào! 🍇`);
                   return; // Không có item nào để chọn
                 }
                 buttons = getVtumonListComponents(vtumon_list);
@@ -152,7 +190,7 @@ client.on('interactionCreate', async interaction => {
                   n++;
                 }
                 await interaction.message.channel.send({
-                  content: `Trainer ${addTag(interaction.user.id)}, cậu chọn vtumon nào cho item Superchat? ✨` + ct + "\n",
+                  content: `Trainer ${addTag(interaction.user.id)}, cậu chọn vtumon nào cho item Debut 2.0? ✨` + ct + "\n",
                   components: buttons
                 });
                 is_delete = false
@@ -277,7 +315,7 @@ client.on('interactionCreate', async interaction => {
                 game.setTypeIdQueryCommand(interaction.customId)
                 deleteMessage(interaction)
                 if (!vtumon_list || vtumon_list.length === 0) {
-                  await interaction.message.channel.send(`${addTag(interaction.user.id)}, bạn không có item nào! 🍇`);
+                  await interaction.message.channel.send(`${addTag(interaction.user.id)}, bạn không có vtumon nào! 🍇`);
                   return; // Không có item nào để chọn
                 }
                 buttons = getVtumonListComponents(vtumon_list);
@@ -304,42 +342,34 @@ client.on('interactionCreate', async interaction => {
         case '🐱': // Vtumon số 0
           vtumon = game.getVtumonOfPlayerByIndex(interaction.user.id, game.getIconVtumonToId(interaction.customId))
           if (vtumon) {
-            game.setTargetIdQueryCommand(vtumon.name)
-            const containerComponent = new ContainerBuilder()
-              .addTextDisplayComponents(
-                new TextDisplayBuilder().setContent(`${addTag(interaction.user.id)} đã sử dụng ${game.query_command.type} ${game.query_command.type_id} với đối tượng vtumon là ${vtumon.name}`)
-              );
-            await interaction.message.channel.send({ flags: MessageFlags.IsComponentsV2, components: [containerComponent] });
-            console.log(game.query_command)
-            game.resetQueryCommand() // Reset query sau khi gửi
+            API_Target_Vtumon(interaction, vtumon)
           }
           break;
         case '🦇': // Vtumon số 1
           vtumon = game.getVtumonOfPlayerByIndex(interaction.user.id, game.getIconVtumonToId(interaction.customId))
           if (vtumon) {
-            game.setTargetIdQueryCommand(vtumon.name)
-            const containerComponent = new ContainerBuilder()
-              .addTextDisplayComponents(
-                new TextDisplayBuilder().setContent(`${addTag(interaction.user.id)} đã sử dụng ${game.query_command.type} ${game.query_command.type_id} với đối tượng vtumon là ${vtumon.name}`)
-              );
-            await interaction.message.channel.send({ flags: MessageFlags.IsComponentsV2, components: [containerComponent] });
-            console.log(game.query_command)
-            game.resetQueryCommand() // Reset query sau khi gửi
-
+            API_Target_Vtumon(interaction, vtumon)
           }
           break;
         case '🦊': // Vtumon số 2
           vtumon = game.getVtumonOfPlayerByIndex(interaction.user.id, game.getIconVtumonToId(interaction.customId))
           if (vtumon) {
-            game.setTargetIdQueryCommand(vtumon.name)
-            const containerComponent = new ContainerBuilder()
-              .addTextDisplayComponents(
-                new TextDisplayBuilder().setContent(`${addTag(interaction.user.id)} đã sử dụng ${game.query_command.type} ${game.query_command.type_id} với đối tượng vtumon là ${vtumon.name}`)
-              );
-            await interaction.message.channel.send({ flags: MessageFlags.IsComponentsV2, components: [containerComponent] });
-            console.log(game.query_command)
-            game.resetQueryCommand() // Reset query sau khi gửi
+            API_Target_Vtumon(interaction, vtumon)
           }
+          break;
+
+        // Skill List reactions
+        case '🌀': // Skill số 0
+          API_Skill_Instant_Use(interaction, 0, false)
+          break;
+        case '🗡️': // Skill số 0
+          API_Skill_Instant_Use(interaction, 1, false)
+          break;
+        case '🛡️': // Skill số 0
+          API_Skill_Instant_Use(interaction, 2, false)
+          break;
+        case '💥': // Skill số 0
+          API_Skill_Instant_Use(interaction, 3, false)
           break;
         case 'close':
           // Ấn vào thì ăn xóa message

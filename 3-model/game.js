@@ -1,6 +1,16 @@
 const { getRandomVtumons } = require('./vtumon'); // <-- import hàm addTag
 const { getrandomItems, getNameOfItemById } = require('./item'); // <-- import fake data
-function createPlayer(id) {
+
+
+
+let player1 = null
+let player2 = null;
+/**
+ * 
+ * @param {ID User Discord} user_id 
+ * @returns {Object Player} 
+ */
+function createPlayer(user_id) {
     //API Lấy vtumon 1 player
     // Không có API nên tạm lấy fake data
     const vtumons = getRandomVtumons();
@@ -12,17 +22,16 @@ function createPlayer(id) {
         throw new Error('Không lấy được item cho player');
     }
     return {
-        id: id,         // id của user
+        id: user_id,         // id của user
         items: items,      // mảng item của player
-        vtumons: vtumons     // mảng vtumon của player
+        vtumons: vtumons,     // mảng vtumon của player
+        currentVtumon: 0 // Vtumon hiện tại
     };
 }
-
-let player1 = null;
-let player2 = null;
 let turn = 1;
 let query_command = {
     action: 'action',
+    player_id: 1,
     type: '', // loại thao tác (skill, item, swap, skip)
     type_id: '', // Id của type  skill thì là id của skill, item thì là id của item, swap thì là id của vtumon 
     target_id: '' // Id của đối tượng mục tiêu (nếu có), ví dụ: id của vtumon đối thủ khi swap
@@ -30,12 +39,14 @@ let query_command = {
 
 let item_icons = ['🍏', '🥕', '🍊', '🍋', '🥭']
 let vtumon_icons = ['🐱', '🦇', '🦊']
+let skill_icons = ['🌀', '🗡️', '🛡️', '💥']
 module.exports = {
     get player1() { return player1; },
     get player2() { return player2; },
     get turn() { return turn; },
     get item_icons() { return item_icons; },
     get vtumon_icons() { return vtumon_icons; },
+    get skill_icons() { return skill_icons; },
     get query_command() { return query_command; },
     /**
      * 
@@ -52,6 +63,14 @@ module.exports = {
             default:
                 return ''
         }
+    },
+    /**
+     * Lấy ra vtumon hiện tại đang sử dụng của current player
+     * @returns 
+     */
+    getCurrentVtumon() {
+        let currentPlayer = this.getCurrentPlayer()
+        return currentPlayer.vtumons[currentPlayer.currentVtumon]
     },
     /**
      * Thiết lập target_id cho query_command
@@ -196,6 +215,14 @@ module.exports = {
         return this.item_icons.indexOf(icon);
     },
     /**
+    * Lấy ID của item từ biến item_icons
+    * @param {emoji|string} icon - Biểu tượng của skill
+    * @returns {number} - ID icon , sử dụng id này để lấy ra id của item theo index tương ứng
+    */
+    getIconSkillToId(icon) {
+        return this.skill_icons.indexOf(icon);
+    },
+    /**
      * 
      * @param {emoji|string} icon 
      * @returns {number} - ID icon , sử dụng id này để lấy ra id của vtumon theo index tương ứng
@@ -226,6 +253,7 @@ module.exports = {
     resetQueryCommand() {
         query_command = {
             action: 'action',
+            player: turn,
             type: '', // loại thao tác (skill, item, swap, skip)
             type_id: '', // Id của type  skill thì là id của skill, item thì là id của item, swap thì là id của vtumon 
             target_id: '' // Id của đối tượng mục tiêu (nếu có), ví dụ: id của vtumon đối thủ khi swap
