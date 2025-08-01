@@ -50,6 +50,7 @@
     GUILD_ID=your_server_id_here
     CLIENT_ID=your_client_id_here
 🛠️ Lấy BOT Token ở trong 👉 https://discord.com/developers/applications
+
 🛠️ Cách bật hiển thị ID trên Discord
 Mở Discord
 
