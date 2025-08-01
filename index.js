@@ -385,7 +385,7 @@ client.on('interactionCreate', async interaction => {
       game.setTargetIdQueryCommand(interaction.customId)
       const containerComponent = new ContainerBuilder()
         .addTextDisplayComponents(
-          new TextDisplayBuilder().setContent(`${addTag(interaction.user.id)} đã sử dụng ${game.query_command.type} ${game.query_command.type_id} với nguyên tố là ${interaction.customId}`)
+          new TextDisplayBuilder().setContent(`Trainer ${addTag(interaction.user.id)} đã sử dụng ${game.query_command.type} ${game.query_command.type_id} với nguyên tố là ${interaction.customId}`)
         );
       await interaction.message.channel.send({ flags: MessageFlags.IsComponentsV2, components: [containerComponent] });
       console.log(game.query_command)
