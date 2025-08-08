@@ -35,7 +35,7 @@
 
 > 🌟 Sau khi mời xong, cậu sẽ thấy bot xuất hiện trong server rồi đó! Nếu chưa thấy, kiểm tra lại quyền hoặc thử khởi động bot nhé~
 
-## 📦 Bước 4: Cài đặt môi trường code (Node.js)
+## 📦 Bước 4: Cài đặt môi trường code (Node.js) (Nếu chưa có Git thì cài git nhé)
 
 1. Cài đặt **Node.js** tại:  
    👉 https://nodejs.org

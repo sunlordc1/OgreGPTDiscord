@@ -1,5 +1,6 @@
 require('dotenv').config();
 const fs = require('fs');
+// FOR DISCORD BOT
 const { Client, Collection, GatewayIntentBits, ContainerBuilder, TextDisplayBuilder, MessageFlags } = require('discord.js');
 const game = require('./3-model/game'); // <-- import game object
 const elements = require('./3-model/element'); // <-- import game object
@@ -8,8 +9,37 @@ const { getItemListComponents } = require('./4-components/item_list')
 const { getVtumonListComponents } = require('./4-components/vtumon_list')
 const { getElementListComponents } = require('./4-components/element_list')
 const { getSkillListComponents } = require('./4-components/skill_list')
-
 const { API_Item_Restream, API_Item_Instant_Use, API_Target_Vtumon, API_Skill_Instant_Use } = require('./5-apis/actions')
+// FOR WEBSOCKET
+// const { Server } = require("socket.io");
+// const http = require("http");
+
+// const server = http.createServer();
+// const io = new Server(server, {
+//   cors: {
+//     origin: "*", // Cho Unreal Engine truy cập
+//   }
+// });
+
+// server.listen(8686, () => {
+//   console.log("⚡ Socket.IO server running at http://localhost:8686");
+// });
+
+// // Lắng nghe kết nối từ Unreal
+// io.on("connection", (socket) => {
+//   console.log("🧠 Unreal Engine connected!");
+
+//   // Nhận sự kiện từ Unreal
+//   socket.on("fromUnreal", (data) => {
+//     console.log("💌 Data từ Unreal:", data);
+    
+//     // Ví dụ: phản hồi lại cho Unreal
+//     socket.emit("fromBot", { message: "Chào Unreal từ Discord bot!" });
+//   });
+// });
+// END FOR SOCKET
+
+
 const client = new Client({
   intents: [
     GatewayIntentBits.Guilds,
