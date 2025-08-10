@@ -1,9 +1,11 @@
 const { Client, Collection, GatewayIntentBits, ContainerBuilder, TextDisplayBuilder, MessageFlags } = require('discord.js');
 const { addTag, deleteMessage } = require('../utils'); // <-- import hàm addTag
 const game = require('../3-model/game'); // <-- import game object
+const { serverBroadcast } = require('../websocket')
 async function API_Item_Restream(interaction) {
     game.setTargetIdQueryCommand(interaction.customId)
     console.log(game.query_command)
+    serverBroadcast(JSON.stringify(game.query_command))
     containerComponent = new ContainerBuilder()
         .addTextDisplayComponents(
             new TextDisplayBuilder().setContent(`Trainer ${addTag(interaction.user.id)} đã Restream lại item ${interaction.customId}! 🌀`)
@@ -14,6 +16,7 @@ async function API_Item_Restream(interaction) {
 async function API_Item_Instant_Use(interaction) {
     game.setTypeIdQueryCommand(interaction.customId)
     console.log(game.query_command)
+    serverBroadcast(JSON.stringify(game.query_command))
     containerComponent = new ContainerBuilder()
         .addTextDisplayComponents(
             new TextDisplayBuilder().setContent(`Trainer ${addTag(interaction.user.id)} đã sử dụng item ${interaction.customId}! 🌀`)
@@ -38,6 +41,7 @@ async function API_Skill_Instant_Use(interaction, skill_id, Isreply) {
         await interaction.message.channel.send({ flags: MessageFlags.IsComponentsV2, components: [containerComponent] });
     }
     console.log(game.query_command)
+    serverBroadcast(JSON.stringify(game.query_command))
     game.resetQueryCommand() // Reset query sau khi gửi
 }
 async function API_Target_Vtumon(interaction, vtumon) {
@@ -62,6 +66,7 @@ async function API_Target_Vtumon(interaction, vtumon) {
             break;
     }
     console.log(game.query_command)
+    serverBroadcast(JSON.stringify(game.query_command))
     game.resetQueryCommand() // Reset query sau khi gửi
 }
 
