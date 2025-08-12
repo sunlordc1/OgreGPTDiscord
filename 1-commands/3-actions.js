@@ -11,6 +11,9 @@ module.exports = {
         if (!game.isTurnOfPlayer(interaction.user.id)) return await interaction.reply({
             content: `${addTag(interaction.user.id)} bạn đang không có quyền, hãy để quản trò !set_player để có quyền chơi nhé!`,
         });// Chỉ xử lý nếu là lượt của người chơi
+        if (game.isNotHavePlayerData()) return await interaction.reply({
+            content: `${addTag(interaction.user.id)} Trainer chưa có dữ liệu, không thể action`,
+        });// Chỉ xử lý nếu là lượt của người chơi
 
         const buttons = getActionsButton();
         await interaction.reply({

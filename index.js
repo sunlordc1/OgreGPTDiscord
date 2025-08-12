@@ -10,7 +10,9 @@ const { getVtumonListComponents } = require('./4-components/vtumon_list')
 const { getElementListComponents } = require('./4-components/element_list')
 const { getSkillListComponents } = require('./4-components/skill_list')
 const { API_Item_Restream, API_Item_Instant_Use, API_Target_Vtumon, API_Skill_Instant_Use } = require('./5-apis/actions')
-require('./websocket');
+const ws = require('./websocket');
+const registerInteractionCreate = require('./1b-listener/set_trainer');
+ws.ensureWebSocket(); // Khởi chạy server 1 lần
 
 const client = new Client({
   intents: [
@@ -25,7 +27,7 @@ client.commands = new Collection();
 client.prefixCommands = new Collection();
 
 const prefix = '!'; // cậu có thể thay prefix nè 🍓
-
+game.reset()
 // Load Slash Commands
 const commandFiles = fs.readdirSync('./1-commands');
 for (const file of commandFiles) {
@@ -39,6 +41,7 @@ for (const file of prefixFiles) {
   const command = require(`./2-prefixCommands/${file}`);
   client.prefixCommands.set(command.name, command);
 }
+registerInteractionCreate(client);
 
 // Slash command interaction
 client.on('interactionCreate', async interaction => {
@@ -68,7 +71,15 @@ client.on('interactionCreate', async interaction => {
       switch (interaction.customId) {
         //List Actions
         case 'skip':
-          game.setTypeQueryCommand('skip'); // <-- Set type query command to skip
+          game.setQueryCommand({
+            action: 'action',
+            player_id: game.turn,
+            type: 'skip', // Tên user
+            type_id: '', // Id của type  skill thì là id của skill, item thì là id của item, swap thì là id của vtumon 
+            target_id: '' // Id của đối tượng mục tiêu (nếu có), ví dụ: id của vtumon đối thủ khi swap
+          })
+          ws.serverBroadcast(JSON.stringify(game.query_command))
+          game.resetQueryCommand() // Reset query sau khi gửi
           const containerComponent = new ContainerBuilder()
             .addTextDisplayComponents(
               new TextDisplayBuilder().setContent(`${addTag(interaction.user.id)} đã chọn skip lượt`)
@@ -107,7 +118,7 @@ client.on('interactionCreate', async interaction => {
           n = 0
           ct = ''
           for (const item of item_list) {
-            ct += `\n${game.item_icons[n]} ${item.name}: ${item.desc}`
+            ct += `\n${game.item_icons[n]} ${item.name} ${item.used ? ' - [Đã dùng]' : ' - [Chưa dùng]'}: ${item.desc}`
             n++;
           }
           await interaction.message.channel.send({
@@ -250,7 +261,7 @@ client.on('interactionCreate', async interaction => {
                 n = 0
                 ct = ''
                 for (const item of item_list) {
-                  ct += `\n${game.item_icons[n]} ${item.name}: ${item.desc}`
+                  ct += `\n${game.item_icons[n]} ${item.name} ${item.used ? ' - [Đã dùng]' : ' - [Chưa dùng]'}: ${item.desc}`
                   n++;
                 }
                 await interaction.message.channel.send({

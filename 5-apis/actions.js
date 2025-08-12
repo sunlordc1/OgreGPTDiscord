@@ -3,8 +3,11 @@ const { addTag, deleteMessage } = require('../utils'); // <-- import hàm addTag
 const game = require('../3-model/game'); // <-- import game object
 const { serverBroadcast } = require('../websocket')
 async function API_Item_Restream(interaction) {
+    if (game.isNotHavePlayerData()) return true
+
     game.setTargetIdQueryCommand(interaction.customId)
     console.log(game.query_command)
+    game.query_command.player_id = game.turn
     serverBroadcast(JSON.stringify(game.query_command))
     containerComponent = new ContainerBuilder()
         .addTextDisplayComponents(
@@ -14,8 +17,11 @@ async function API_Item_Restream(interaction) {
     game.resetQueryCommand() // Reset query sau khi gửi
 }
 async function API_Item_Instant_Use(interaction) {
+    if (game.isNotHavePlayerData()) return true
+
     game.setTypeIdQueryCommand(interaction.customId)
     console.log(game.query_command)
+    game.query_command.player_id = game.turn
     serverBroadcast(JSON.stringify(game.query_command))
     containerComponent = new ContainerBuilder()
         .addTextDisplayComponents(
@@ -25,9 +31,18 @@ async function API_Item_Instant_Use(interaction) {
     game.resetQueryCommand() // Reset query sau khi gửi
 }
 async function API_Skill_Instant_Use(interaction, skill_id, Isreply) {
+    if (game.isNotHavePlayerData()) return true
+
     let currentVtumon = game.getCurrentVtumon()
-    game.setTypeQueryCommand('skill'); // <-- Set type query command to skip
-    game.setTypeIdQueryCommand('skill_0'); // <-- Set type query command to skip
+    game.setQueryCommand({
+        action: 'action',
+        player_id: game.turn,
+        type: 'skill', // Tên user
+        type_id: 'skill_' + skill_id, // Id của type  skill thì là id của skill, item thì là id của item, swap thì là id của vtumon 
+        target_id: '' // Id của đối tượng mục tiêu (nếu có), ví dụ: id của vtumon đối thủ khi swap
+    })
+    console.log(game.query_command)
+
     const containerComponent = new ContainerBuilder()
         .addTextDisplayComponents(
             new TextDisplayBuilder().setContent(`Trainer ${addTag(interaction.user.id)}: ${currentVtumon.name} ${skill_id}A! ${currentVtumon.skills[skill_id].name} ✨`)
@@ -41,6 +56,7 @@ async function API_Skill_Instant_Use(interaction, skill_id, Isreply) {
         await interaction.message.channel.send({ flags: MessageFlags.IsComponentsV2, components: [containerComponent] });
     }
     console.log(game.query_command)
+    game.query_command.player_id = game.turn
     serverBroadcast(JSON.stringify(game.query_command))
     game.resetQueryCommand() // Reset query sau khi gửi
 }
@@ -66,6 +82,7 @@ async function API_Target_Vtumon(interaction, vtumon) {
             break;
     }
     console.log(game.query_command)
+    game.query_command.player_id = game.turn
     serverBroadcast(JSON.stringify(game.query_command))
     game.resetQueryCommand() // Reset query sau khi gửi
 }

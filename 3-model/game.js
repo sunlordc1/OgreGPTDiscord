@@ -3,29 +3,44 @@ const { getrandomItems, getNameOfItemById } = require('./item'); // <-- import f
 
 
 
-let player1 = null
-let player2 = null;
+let player1 = {
+    id: 0,         // id của user
+    items: [],      // mảng item của player
+    vtumons: [],     // mảng vtumon của player
+    currentVtumon: 0 // Vtumon hiện tại
+}
+let player2 = {
+    id: 0,         // id của user
+    items: [],      // mảng item của player
+    vtumons: [],     // mảng vtumon của player
+    currentVtumon: 0 // Vtumon hiện tại
+};
 /**
  * 
  * @param {ID User Discord} user_id 
+ * @param {Item Array} items 
+ * @param {Vtumon Array} vtumons 
+ * @param {integer } currentVtumon 
  * @returns {Object Player} 
  */
-function createPlayer(user_id) {
-    //API Lấy vtumon 1 player
+function createPlayer(user_id, items = [], vtumons = [], currentVtumon = 0) {
+    //API Lấy vtumon 1 players
     // Không có API nên tạm lấy fake data
-    const vtumons = getRandomVtumons();
-    if (!vtumons || vtumons.length === 0) {
-        throw new Error('Không lấy được vtumon cho player');
-    }
-    const items = getrandomItems()
-    if (!items || items.length === 0) {
-        throw new Error('Không lấy được item cho player');
-    }
+
+    // const vtumons = getRandomVtumons();
+    // if (!vtumons || vtumons.length === 0) {
+    //     throw new Error('Không lấy được vtumon cho player');
+    // }
+    // const items = getrandomItems()
+    // if (!items || items.length === 0) {
+    //     throw new Error('Không lấy được item cho player');
+    // }
+
     return {
         id: user_id,         // id của user
-        items: items,      // mảng item của player
-        vtumons: vtumons,     // mảng vtumon của player
-        currentVtumon: 0 // Vtumon hiện tại
+        items: [...items],
+        vtumons: [...vtumons],
+        currentVtumon: currentVtumon // Vtumon hiện tại
     };
 }
 let turn = 1;
@@ -48,6 +63,13 @@ module.exports = {
     get vtumon_icons() { return vtumon_icons; },
     get skill_icons() { return skill_icons; },
     get query_command() { return query_command; },
+    isNotHavePlayerData() {
+        if (player1.id == 0 || player2.id == 0) {
+            return true
+        }
+        return false
+    }
+    ,
     /**
      * 
      * @returns Tên của type_id dựa theo type đang có
@@ -70,6 +92,7 @@ module.exports = {
      */
     getCurrentVtumon() {
         let currentPlayer = this.getCurrentPlayer()
+        console.log(currentPlayer)
         return currentPlayer.vtumons[currentPlayer.currentVtumon]
     },
     /**
@@ -99,12 +122,12 @@ module.exports = {
      * Thiết lập player1 với ID
      * @param {string} id - ID của người dùng
      */
-    setPlayer1(id) { player1 = createPlayer(id); },
+    setPlayer1(id, items = [], vtumons = [], currentVtumon = 0) { player1 = createPlayer(id, items, vtumons, currentVtumon); },
     /**
      * Thiết lập player2 với ID
      * @param {string} id - ID của người dùng
      */
-    setPlayer2(id) { player2 = createPlayer(id); },
+    setPlayer2(id, items = [], vtumons = [], currentVtumon = 0) { player2 = createPlayer(id, items, vtumons, currentVtumon); },
     /**
      * Thiết lập lượt chơi
      * @param {number} value - Giá trị mới của lượt (1 hoặc 2)
@@ -253,15 +276,25 @@ module.exports = {
     resetQueryCommand() {
         query_command = {
             action: 'action',
-            player: turn,
+            player_id: turn,
             type: '', // loại thao tác (skill, item, swap, skip)
             type_id: '', // Id của type  skill thì là id của skill, item thì là id của item, swap thì là id của vtumon 
             target_id: '' // Id của đối tượng mục tiêu (nếu có), ví dụ: id của vtumon đối thủ khi swap
         };
     },
     /**
+     * Thiết lập lại giá trị ban đầu query_command với action, type và type_id
+     * @param {string} action - Hành động (action)
+     * @param {string} type - Loại thao tác (type)
+     * @param {string} type_id - Tên của loại thao tác (type_id)
+     * @param {string} target_id - Tên của loại thao tác (type_id)
+     */
+    setQueryCommand(obj) {
+        query_command = obj
+    },
+    /**
      * Reset game state
      * @returns {void}
      */
-    reset() { player1 = null; player2 = null; turn = 1; this.resetQueryCommand() },
+    reset() { player1 = createPlayer(0); player2 = createPlayer(0); turn = 1; this.resetQueryCommand() },
 };

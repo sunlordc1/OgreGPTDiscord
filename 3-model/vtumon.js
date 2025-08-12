@@ -707,9 +707,16 @@ function getRandomVtumons() {
     const shuffled = [...vtumons].sort(() => Math.random() - 0.5);
     return shuffled.slice(0, 3);
 }
-
+function findVtumonByName(name) {
+    return vtumons.find(vtumon => vtumon.name.trim().toLowerCase() === name.trim().toLowerCase()) || null;
+}
+function getVtumonsFromNames(nameArray) {
+    return nameArray
+        .map(name => findVtumonByName(name))
+        .filter(vtumon => vtumon !== null); // loại bỏ trường hợp không tìm thấy
+}
 module.exports = {
-    getRandomVtumons, transformSkills, vtumons
+    getRandomVtumons, transformSkills, findVtumonByName, getVtumonsFromNames, vtumons
 };
 
 

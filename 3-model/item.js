@@ -5,7 +5,7 @@ const items = [
   { id: 4, name: 'Cắn cáp', desc: 'Skip lượt tiếp theo của đối phương', used: false },
   { id: 5, name: 'Xóa filter', desc: 'Skill tiếp theo không bị ảnh hưởng bởi phản ứng hệ', used: false },
   { id: 6, name: 'Restream', desc: 'Dùng lại 1 Item bạn đã dùng', used: false },
-  { id: 7, name: 'Subathon', desc: '(Passive) Tăng Mana tối đa của bạn lên 4. Tương ứng với 3 Item.', used: false },
+  { id: 7, name: 'Subathon', desc: '(Passive) Tăng Mana tối đa của bạn lên 4. Tương ứng với 3 Item.', used: true },
   { id: 8, name: 'Trà sữa', desc: 'Hồi full Mana', used: false },
   { id: 9, name: 'Outfit mới', desc: 'Đổi hệ Skill tiếp theo của bạn', used: false },
   { id: 10, name: 'Collab', desc: 'Triệu hồi 1 Vtumon không tốn Action', used: false }
@@ -25,4 +25,18 @@ function getNameOfItemById(item_id) {
   const item = items.find(item => item.id === item_id);
   return item ? item.name : null;
 }
-module.exports = { items, getrandomItems, getNameOfItemById };
+function getItemsByNames(itemNames) {
+  return itemNames
+    .map(name => items.find(item => item.name.trim().toLowerCase() === name.trim().toLowerCase()) || null)
+    .filter(item => item !== null);
+}
+function markItemUsed(items, itemName, state = false) {
+  return items.map(item => {
+    if (item.name === itemName) {
+      return { ...item, used: state };
+    }
+    return item;
+  });
+}
+
+module.exports = { items, getrandomItems, getNameOfItemById, getItemsByNames, markItemUsed };

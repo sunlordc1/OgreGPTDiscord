@@ -14,22 +14,25 @@ module.exports = {
     const userIds = userTags.map(tag => tag.match(/\d+/)[0]);
     game.setPlayer1(userIds[0]);
     game.setPlayer2(userIds[1]);
+    global.main_message = message.channel.send(`💬 Đã cài đặt quyền command cho 2 Trainer:
+- Trainer 1:  ${addTag(game.player1.id)}
+- Trainer 2:  ${addTag(game.player2.id)}`)
 
-    global.main_message = message.channel.send(
-      `💬 Đã cài đặt player:
-- Player 1:  ${addTag(game.player1.id)}
-  - Vtumon:
-    - ${game.player1.vtumons.map(v => ` 🌀 ${v.name} [${v.elements[0]}, ${v.elements[1]}]`).join('')}
-  - Items:
-${game.player1.items.map(i => `    - ${i.name} (${i.used ? 'Đã dùng' : 'Chưa dùng'}) \n`).join('')}
-- Player 2:  ${addTag(game.player2.id)}
-  - Vtumon:
-    - ${game.player2.vtumons.map(v => ` 🌀 ${v.name} [${v.elements[0]}, ${v.elements[1]}]`).join('')}
-  - Items:
-${game.player2.items.map(i => `    - ${i.name} (${i.used ? 'Đã dùng' : 'Chưa dùng'}) \n`).join('')}
-- Turn hiện tại:  ${addTag(game.turn === 1 ? game.player1.id : game.player2.id)}\n
-Hãy dùng lệnh /setvtumon1 hoặc /setvtumon2 để cài đặt Vtumon cho từng player 🍓`
-    );
+    //     global.main_message = message.channel.send(
+    //       `💬 Đã cài đặt player:
+    // - Player 1:  ${addTag(game.player1.id)}
+    //   - Vtumon:
+    //     - ${game.player1.vtumons.map(v => ` 🌀 ${v.name} [${v.elements[0]}, ${v.elements[1]}]`).join('')}
+    //   - Items:
+    // ${game.player1.items.map(i => `    - ${i.name} (${i.used ? 'Đã dùng' : 'Chưa dùng'}) \n`).join('')}
+    // - Player 2:  ${addTag(game.player2.id)}
+    //   - Vtumon:
+    //     - ${game.player2.vtumons.map(v => ` 🌀 ${v.name} [${v.elements[0]}, ${v.elements[1]}]`).join('')}
+    //   - Items:
+    // ${game.player2.items.map(i => `    - ${i.name} (${i.used ? 'Đã dùng' : 'Chưa dùng'}) \n`).join('')}
+    // - Turn hiện tại:  ${addTag(game.turn === 1 ? game.player1.id : game.player2.id)}\n
+    // Hãy dùng lệnh /setvtumon1 hoặc /setvtumon2 để cài đặt Vtumon cho từng player 🍓`
+    //     );
     return;
   },
 };

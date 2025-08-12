@@ -11,13 +11,13 @@ module.exports = {
 
 
     async execute(interaction) {
-        axios.get('http://127.0.0.1:8668/')
-            .then(function (response) {
-                console.log('📥 Dữ liệu từ /vtumon:', response.data);
-            })
-            .catch(function (error) {
-                console.error('🚨 Lỗi khi gọi /vtumon:', error.message);
-            })
+        // axios.get('http://127.0.0.1:8668/')
+        //     .then(function (response) {
+        //         console.log('📥 Dữ liệu từ /vtumon:', response.data);
+        //     })
+        //     .catch(function (error) {
+        //         console.error('🚨 Lỗi khi gọi /vtumon:', error.message);
+        //     })
         return await interaction.reply(
             'Đã thử gửi 1 API'
         )
