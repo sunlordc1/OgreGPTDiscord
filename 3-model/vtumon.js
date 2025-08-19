@@ -6,22 +6,22 @@ const vtumons = [
             {
                 name: "Chập mạch",
                 mana_cost: 0,
-                element_name: "Dragon"
+                element_name: "Electric"
             },
             {
                 name: "Nhìn khinh bỉ",
                 mana_cost: 1,
-                element_name: "Bug"
+                element_name: "Steel"
             },
             {
                 name: "Dạ dày thép",
-                mana_cost: 1,
-                element_name: "Fairy"
+                mana_cost: 2,
+                element_name: "Steel"
             },
             {
                 name: "Bản hit bùng nổ",
                 mana_cost: 3,
-                element_name: "Ground"
+                element_name: "Electric"
             }
         ],
         elements: [
@@ -35,23 +35,23 @@ const vtumons = [
         skills: [
             {
                 name: "Cắn nhẹ",
-                mana_cost: 1,
-                element_name: "Fire"
+                mana_cost: 0,
+                element_name: "Flying"
             },
             {
                 name: "Nhà tù tình yêu",
-                mana_cost: 1,
-                element_name: "Psychic"
+                mana_cost: 2,
+                element_name: "Dark"
             },
             {
                 name: "Nụ hôn tử thần",
-                mana_cost: 3,
-                element_name: "Ice"
+                mana_cost: 2,
+                element_name: "Dark"
             },
             {
                 name: "Chắp cánh ước mơ",
-                mana_cost: 2,
-                element_name: "Steel"
+                mana_cost: 3,
+                element_name: "Flying"
             }
         ],
         elements: [
@@ -71,17 +71,17 @@ const vtumons = [
             {
                 name: "Chia ngọt sẻ bùi",
                 mana_cost: 1,
-                element_name: "Dragon"
+                element_name: "Fairy"
             },
             {
                 name: "Mắt ướt",
-                mana_cost: 1,
-                element_name: "Ground"
+                mana_cost: 2,
+                element_name: "Fairy"
             },
             {
                 name: "Thô bạo",
-                mana_cost: 2,
-                element_name: "Bug"
+                mana_cost: 3,
+                element_name: "Ghost"
             }
         ],
         elements: [
@@ -96,22 +96,22 @@ const vtumons = [
             {
                 name: "Cọc cằn",
                 mana_cost: 1,
-                element_name: "Ghost"
+                element_name: "Fighting"
             },
             {
                 name: "Lời vàng ngọc",
-                mana_cost: 2,
-                element_name: "Fire"
+                mana_cost: 1,
+                element_name: "Psychic"
             },
             {
                 name: "Gia nhập tầng hầm",
-                mana_cost: 1,
-                element_name: "Ghost"
+                mana_cost: 2,
+                element_name: "Psychic"
             },
             {
                 name: "Cướp cạn",
-                mana_cost: 2,
-                element_name: "Ghost"
+                mana_cost: 3,
+                element_name: "Fighting"
             }
         ],
         elements: [
@@ -125,23 +125,23 @@ const vtumons = [
         skills: [
             {
                 name: "Gạt giò",
-                mana_cost: 0,
-                element_name: "Water"
+                mana_cost: 1,
+                element_name: "Ground"
             },
             {
                 name: "Đầu đất",
                 mana_cost: 2,
-                element_name: "Electric"
+                element_name: "Ground"
             },
             {
                 name: "Chạm cỏ",
-                mana_cost: 0,
-                element_name: "Ghost"
+                mana_cost: 2,
+                element_name: "Grass"
             },
             {
                 name: "Mê mẩn",
-                mana_cost: 0,
-                element_name: "Poison"
+                mana_cost: 3,
+                element_name: "Grass"
             }
         ],
         elements: [
@@ -156,22 +156,22 @@ const vtumons = [
             {
                 name: "Cái nhìn xuyên thấu",
                 mana_cost: 0,
-                element_name: "Fighting"
+                element_name: "Dark"
             },
             {
                 name: "Phong ấn thời không",
-                mana_cost: 3,
-                element_name: "Ice"
+                mana_cost: 1,
+                element_name: "Psychic"
             },
             {
                 name: "Tâm linh chi trảo",
-                mana_cost: 1,
-                element_name: "Ice"
+                mana_cost: 2,
+                element_name: "Psychic"
             },
             {
                 name: "Thời khắc tận diệt",
-                mana_cost: 1,
-                element_name: "Ghost"
+                mana_cost: 3,
+                element_name: "Dark"
             }
         ],
         elements: [
@@ -185,23 +185,23 @@ const vtumons = [
         skills: [
             {
                 name: "Trượt tay",
-                mana_cost: 2,
-                element_name: "Psychic"
+                mana_cost: 0,
+                element_name: "Normal"
             },
             {
                 name: "Lỡ chân",
                 mana_cost: 1,
-                element_name: "Fairy"
+                element_name: "Normal"
             },
             {
                 name: "Đứa này non ác",
-                mana_cost: 3,
-                element_name: "Bug"
+                mana_cost: 2,
+                element_name: "Psychic"
             },
             {
                 name: "Cay không?",
-                mana_cost: 0,
-                element_name: "Poison"
+                mana_cost: 3,
+                element_name: "Psychic"
             }
         ],
         elements: [
@@ -215,23 +215,23 @@ const vtumons = [
         skills: [
             {
                 name: "Nồi đồng nấu ốc",
-                mana_cost: 3,
-                element_name: "Ice"
+                mana_cost: 1,
+                element_name: "Fire"
             },
             {
                 name: "Nồi đất nấu ếch",
-                mana_cost: 1,
-                element_name: "Flying"
+                mana_cost: 2,
+                element_name: "Fire"
             },
             {
                 name: "Bắt con cọp",
-                mana_cost: 1,
-                element_name: "Poison"
+                mana_cost: 2,
+                element_name: "Dragon"
             },
             {
                 name: "Rồng lộn",
-                mana_cost: 1,
-                element_name: "Steel"
+                mana_cost: 3,
+                element_name: "Dragon"
             }
         ],
         elements: [
@@ -245,23 +245,23 @@ const vtumons = [
         skills: [
             {
                 name: "Key blade",
-                mana_cost: 0,
-                element_name: "Flying"
-            },
-            {
-                name: "Play rough",
                 mana_cost: 1,
                 element_name: "Fighting"
             },
             {
+                name: "Play rough",
+                mana_cost: 2,
+                element_name: "Fighting"
+            },
+            {
                 name: "Tentacles punch",
-                mana_cost: 1,
-                element_name: "Normal"
+                mana_cost: 2,
+                element_name: "Ghost"
             },
             {
                 name: "Spectral parade",
                 mana_cost: 3,
-                element_name: "Bug"
+                element_name: "Ghost"
             }
         ],
         elements: [
@@ -276,22 +276,22 @@ const vtumons = [
             {
                 name: "Neko punch",
                 mana_cost: 1,
-                element_name: "Fairy"
+                element_name: "Normal"
             },
             {
                 name: "Đẹp trai thần chưởng",
-                mana_cost: 2,
-                element_name: "Ground"
+                mana_cost: 1,
+                element_name: "Psychic"
             },
             {
                 name: "Xe đạp mèo dâu",
-                mana_cost: 0,
-                element_name: "Grass"
+                mana_cost: 2,
+                element_name: "Psychic"
             },
             {
                 name: "Dâu đẫm máu",
-                mana_cost: 0,
-                element_name: "Steel"
+                mana_cost: 3,
+                element_name: "Psychic"
             }
         ],
         elements: [
@@ -305,23 +305,23 @@ const vtumons = [
         skills: [
             {
                 name: "Bụi phước lành",
-                mana_cost: 2,
-                element_name: "Steel"
+                mana_cost: 1,
+                element_name: "Fairy"
             },
             {
                 name: "Dây leo phán xét",
                 mana_cost: 2,
-                element_name: "Fighting"
+                element_name: "Fairy"
             },
             {
                 name: "Hoa hồng địa ngục",
-                mana_cost: 3,
-                element_name: "Normal"
+                mana_cost: 2,
+                element_name: "Dark"
             },
             {
                 name: "Khế ước kép",
-                mana_cost: 1,
-                element_name: "Normal"
+                mana_cost: 3,
+                element_name: "Dark"
             }
         ],
         elements: [
@@ -335,23 +335,23 @@ const vtumons = [
         skills: [
             {
                 name: "Shark teeth",
-                mana_cost: 2,
-                element_name: "Fire"
+                mana_cost: 1,
+                element_name: "Dark"
             },
             {
                 name: "Glitch hand",
-                mana_cost: 3,
-                element_name: "Ice"
+                mana_cost: 1,
+                element_name: "Psychic"
             },
             {
                 name: "Glitch knife",
-                mana_cost: 0,
-                element_name: "Electric"
+                mana_cost: 2,
+                element_name: "Psychic"
             },
             {
                 name: "Glitch hole",
-                mana_cost: 2,
-                element_name: "Grass"
+                mana_cost: 3,
+                element_name: "Dark"
             }
         ],
         elements: [
@@ -365,23 +365,23 @@ const vtumons = [
         skills: [
             {
                 name: "Triệu hồi bí ngô",
-                mana_cost: 3,
-                element_name: "Fighting"
+                mana_cost: 1,
+                element_name: "Grass"
             },
             {
                 name: "Phạt cảnh cáo",
-                mana_cost: 0,
-                element_name: "Fire"
+                mana_cost: 1,
+                element_name: "Steel"
             },
             {
                 name: "Xích lại gần nhau",
-                mana_cost: 0,
-                element_name: "Normal"
+                mana_cost: 2,
+                element_name: "Steel"
             },
             {
                 name: "Cơn lốc màu da cam",
-                mana_cost: 0,
-                element_name: "Dragon"
+                mana_cost: 3,
+                element_name: "Grass"
             }
         ],
         elements: [
@@ -395,23 +395,23 @@ const vtumons = [
         skills: [
             {
                 name: "Mayone ngập đầu",
-                mana_cost: 2,
-                element_name: "Poison"
+                mana_cost: 1,
+                element_name: "Fairy"
             },
             {
                 name: "Vodka ướp lạnh",
                 mana_cost: 1,
-                element_name: "Electric"
+                element_name: "Ice"
             },
             {
                 name: "Chó dại xuất kích",
-                mana_cost: 3,
-                element_name: "Grass"
+                mana_cost: 2,
+                element_name: "Ice"
             },
             {
                 name: "Đóng băng tài khoản",
-                mana_cost: 0,
-                element_name: "Flying"
+                mana_cost: 3,
+                element_name: "Ice"
             }
         ],
         elements: [
@@ -425,23 +425,23 @@ const vtumons = [
         skills: [
             {
                 name: "Crescent impact",
-                mana_cost: 2,
-                element_name: "Electric"
+                mana_cost: 1,
+                element_name: "Steel"
             },
             {
                 name: "Day break illusion",
                 mana_cost: 2,
-                element_name: "Steel"
+                element_name: "Fairy"
             },
             {
                 name: "Calamity strike",
-                mana_cost: 2,
-                element_name: "Grass"
+                mana_cost: 3,
+                element_name: "Steel"
             },
             {
                 name: "Moonlight divine",
-                mana_cost: 0,
-                element_name: "Electric"
+                mana_cost: 3,
+                element_name: "Fairy"
             }
         ],
         elements: [
@@ -455,23 +455,23 @@ const vtumons = [
         skills: [
             {
                 name: "Ý chí Ironus",
-                mana_cost: 0,
-                element_name: "Grass"
+                mana_cost: 1,
+                element_name: "Water"
             },
             {
                 name: "Hướng về nguồn cội",
-                mana_cost: 3,
-                element_name: "Ghost"
+                mana_cost: 2,
+                element_name: "Water"
             },
             {
                 name: "Sức nặng công lý",
-                mana_cost: 1,
-                element_name: "Normal"
+                mana_cost: 2,
+                element_name: "Steel"
             },
             {
                 name: "Vì Irunan!",
-                mana_cost: 0,
-                element_name: "Water"
+                mana_cost: 3,
+                element_name: "Steel"
             }
         ],
         elements: [
@@ -485,23 +485,23 @@ const vtumons = [
         skills: [
             {
                 name: "Tê con",
-                mana_cost: 3,
-                element_name: "Electric"
+                mana_cost: 1,
+                element_name: "Psychic"
             },
             {
                 name: "Tao cao m8",
-                mana_cost: 2,
-                element_name: "Dragon"
+                mana_cost: 1,
+                element_name: "Normal"
             },
             {
                 name: "Bắp cải nè",
-                mana_cost: 3,
-                element_name: "Ice"
+                mana_cost: 2,
+                element_name: "Normal"
             },
             {
                 name: "Tôi cute",
-                mana_cost: 1,
-                element_name: "Fairy"
+                mana_cost: 3,
+                element_name: "Psychic"
             }
         ],
         elements: [
@@ -515,23 +515,23 @@ const vtumons = [
         skills: [
             {
                 name: "Ban phát dân chủ",
-                mana_cost: 1,
-                element_name: "Electric"
+                mana_cost: 0,
+                element_name: "Steel"
             },
             {
                 name: "Biết chơi game không?",
                 mana_cost: 1,
-                element_name: "Normal"
+                element_name: "Steel"
             },
             {
                 name: "Hướng về nguồn cội",
-                mana_cost: 3,
-                element_name: "Grass"
+                mana_cost: 2,
+                element_name: "Dark"
             },
             {
                 name: "Ma âm cổ chú",
-                mana_cost: 1,
-                element_name: "Electric"
+                mana_cost: 3,
+                element_name: "Dark"
             }
         ],
         elements: [
@@ -546,22 +546,22 @@ const vtumons = [
             {
                 name: "Yori-mo-a-na-ta",
                 mana_cost: 1,
-                element_name: "Fire"
+                element_name: "Psychic"
             },
             {
                 name: "Đạn đường viên",
-                mana_cost: 3,
-                element_name: "Fairy"
+                mana_cost: 1,
+                element_name: "Dark"
             },
             {
                 name: "Do bạn xui",
-                mana_cost: 0,
-                element_name: "Fairy"
+                mana_cost: 2,
+                element_name: "Dark"
             },
             {
                 name: "Stream ru ngủ",
-                mana_cost: 0,
-                element_name: "Bug"
+                mana_cost: 3,
+                element_name: "Psychic"
             }
         ],
         elements: [
@@ -575,23 +575,23 @@ const vtumons = [
         skills: [
             {
                 name: "Peek a boo",
-                mana_cost: 3,
-                element_name: "Fighting"
+                mana_cost: 1,
+                element_name: "Ghost"
             },
             {
                 name: "Thơm một cái",
-                mana_cost: 1,
-                element_name: "Ice"
+                mana_cost: 2,
+                element_name: "Fairy"
             },
             {
                 name: "Khóc to lên",
-                mana_cost: 0,
-                element_name: "Fighting"
+                mana_cost: 3,
+                element_name: "Fairy"
             },
             {
                 name: "Tôi yêu các em",
                 mana_cost: 3,
-                element_name: "Electric"
+                element_name: "Ghost"
             }
         ],
         elements: [
@@ -606,21 +606,21 @@ const vtumons = [
             {
                 name: "Băng ngục",
                 mana_cost: 1,
-                element_name: "Psychic"
+                element_name: "Ice"
             },
             {
                 name: "Thủy lốc",
-                mana_cost: 3,
-                element_name: "Fairy"
+                mana_cost: 1,
+                element_name: "Water"
             },
             {
                 name: "Huyết lưu thuật",
                 mana_cost: 2,
-                element_name: "Electric"
+                element_name: "Water"
             },
             {
                 name: "Sóng thần",
-                mana_cost: 1,
+                mana_cost: 3,
                 element_name: "Water"
             }
         ],
@@ -635,23 +635,23 @@ const vtumons = [
         skills: [
             {
                 name: "Star whisper",
-                mana_cost: 3,
-                element_name: "Rock"
+                mana_cost: 1,
+                element_name: "Fairy"
             },
             {
                 name: "Witching gaze",
-                mana_cost: 3,
+                mana_cost: 1,
                 element_name: "Psychic"
             },
             {
                 name: "Demon's wings",
-                mana_cost: 1,
-                element_name: "Ghost"
+                mana_cost: 2,
+                element_name: "Psychic"
             },
             {
                 name: "Hex kiss",
-                mana_cost: 1,
-                element_name: "Water"
+                mana_cost: 3,
+                element_name: "Fairy"
             }
         ],
         elements: [
@@ -670,18 +670,18 @@ const vtumons = [
             },
             {
                 name: "Water bullet",
-                mana_cost: 0,
-                element_name: "Ground"
+                mana_cost: 1,
+                element_name: "Water"
             },
             {
                 name: "Khúm núm",
-                mana_cost: 0,
-                element_name: "Ice"
+                mana_cost: 2,
+                element_name: "Water"
             },
             {
                 name: "Water gun",
-                mana_cost: 1,
-                element_name: "Fairy"
+                mana_cost: 3,
+                element_name: "Water"
             }
         ],
         elements: [
